@@ -3,142 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/assets/Colors/Colors.dart';
 import 'package:flutter_project/assets/Components/Components.dart';
 import 'package:flutter_project/assets/fonts/typo.dart';
+import 'package:flutter_project/views/TabbedComponents/AddPlan.dart';
+import 'package:flutter_project/views/TabbedComponents/HomePage.dart';
 import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: CustomColors.LightPurple,
-        child: Column(children: [
-          Spacer(),
-          Center(
-              child: SizedBox(
-                  width: 350,
-                  child: Row(
-                    children: [
-                      Component.header(
-                          'Coucou toi,', 'T’es en manque de thunes ?',
-                          colors: Colors.white, textAlign: TextAlign.left),
-                      Spacer(),
-                      Image.asset('lib/assets/images/HomeIcon.png')
-                    ],
-                  ))),
-          Spacer(),
-          Material(
-              child: Container(
-                  width: 350,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white),
-                  child: const TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          prefixIcon: Icon(Icons.search),
-                          labelText: "Cherche un bon plan")))),
-          Spacer(),
-          Container(
-              width: double.infinity,
-              height: 600,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(35)),
-                  color: Color(0xFFF7F7F7)),
-              child: SingleChildScrollView(
-                  child: Column(
-                children: [
-                  Padding(
-                      padding: EdgeInsets.all(30),
-                      child: Row(
-                        children: [
-                          Component.BoxSubtitle('Courses', Color(0xFF605DF5),
-                              Icons.shopping_bag_outlined),
-                          Spacer(),
-                          Component.BoxSubtitle(
-                              'Sport', Color(0xFFF4696A), Icons.directions_run),
-                          Spacer(),
-                          Component.BoxSubtitle(
-                              'Trains', Color(0xFF579BFE), Icons.train),
-                          Spacer(),
-                          Component.BoxSubtitle(
-                              'Soirées', Color(0xFF7C8CF9), Icons.party_mode)
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        children: [
-                          Text("Les PLANS du moment",
-                              style: CustomTextStyles.scrollTitle()),
-                          Spacer(),
-                          Text("Voir tout",
-                              style: CustomTextStyles.scrollTitle(
-                                  color: Color(0xFFFC6B68),
-                                  fontWeight: FontWeight.w700))
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 30, right: 30, top: 10),
-                      child: Row(
-                        children: [
-                          Component.fitCardImage(
-                              'Abonnement 1 an',
-                              '2 mois offerts',
-                              './lib/assets/images/grid-images/Big/Basic-fit.png',
-                              './lib/assets/images/grid-images/logos/img-3.png'),
-                          Spacer(),
-                          Component.fitCardImage(
-                              'Le grand barathon',
-                              '1 verre acheté = 1 offert',
-                              './lib/assets/images/grid-images/Big/Barathon.png',
-                              './lib/assets/images/grid-images/logos/img.png'),
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 30, right: 30, top: 10),
-                      child: Row(
-                        children: [
-                          Component.fitCardImage(
-                              'Garantie Appart',
-                              'Pas besoin de garants',
-                              './lib/assets/images/grid-images/Big/Appart.png',
-                              './lib/assets/images/grid-images/logos/img-1.png'),
-                          Spacer(),
-                          Component.fitCardImage(
-                              'Giga MAXI Tacos',
-                              '5€99, dépêche toi !',
-                              './lib/assets/images/grid-images/Big/OTacos.png',
-                              './lib/assets/images/grid-images/logos/img-2.png'),
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(left: 30, right: 30, top: 10),
-                      child: Row(
-                        children: [
-                          Component.fitCardImage(
-                              'Abonnement 1 an',
-                              '2 mois offerts',
-                              './lib/assets/images/grid-images/Big/Basic-fit.png',
-                              './lib/assets/images/grid-images/logos/img-3.png'),
-                          Spacer(),
-                          Component.fitCardImage(
-                              'Giga MAXI Tacos',
-                              '5€99, dépêche toi !',
-                              './lib/assets/images/grid-images/Big/Barathon.png',
-                              './lib/assets/images/grid-images/logos/img.png'),
-                        ],
-                      )),
-                ],
-              )))
-        ]),
-      ),
-      bottomNavigationBar: Component.bottomBar(context)
+    return MaterialApp(
+      home: DefaultTabController(
+        length:3,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+            body:
+            TabBarView(children: [
+              HomePage(),
+              AddPlan(),
+              HomePage()
+            ]),
+            bottomNavigationBar: Component.bottomBar(context)
+        )
+      )
     );
   }
 }

@@ -43,12 +43,14 @@ class Component {
         ]));
   }
 
-  static Center bottomButton(String text, Color colors, BuildContext context,
-      String route, double width,
-      {double height = 56}) {
+  static Center bottomButton(String text, BuildContext context, String route,
+      double width,
+      {double height = 56, Color colors = CustomColors.LightPurple}) {
     return Center(
         child: ElevatedButton(
-          onPressed: () => context.go(route),
+          onPressed: () {
+            context.go(route);
+          },
           style: ElevatedButton.styleFrom(
               fixedSize: Size(width, height),
               backgroundColor: colors,
@@ -58,13 +60,14 @@ class Component {
         ));
   }
 
-  static Container scrollSteps() {
+  static Container scrollSteps(
+      {Color color = Colors.white38, double width = 25}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 0, horizontal: 3),
-      width: 25,
+      width: width,
       height: 5,
-      decoration: const BoxDecoration(
-          color: Colors.white38,
+      decoration: BoxDecoration(
+          color: color,
           borderRadius: BorderRadius.all(Radius.circular(20))),
     );
   }
@@ -103,11 +106,16 @@ class Component {
   static Container textFormField(TextEditingController controller,
       String placeholder, String validatorMessage) {
     return Container(
+        height: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.white),
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
         child: TextFormField(
+          expands: true,
+          minLines: null,
+          maxLines: null,
           controller: controller,
+
           validator: (value) {
             if (value!.isEmpty) {
               return validatorMessage;
@@ -115,7 +123,8 @@ class Component {
             return null;
           },
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+            border: InputBorder.none,
             labelText: placeholder,
           ),
         ));
@@ -160,9 +169,9 @@ class Component {
     ]);
   }
 
-  static SizedBox fitCardImage(String title, String subtitle, String bigImg,
+  static Container fitCardImage(String title, String subtitle, String bigImg,
       String logo) {
-    return SizedBox(
+    return Container(
         height: 162,
         width: 159,
         child: Card(
@@ -225,83 +234,67 @@ class Component {
                 ))));
   }
 
-  static Container bottomBarButton(BuildContext context,String route, IconData icon,
-      {Color color = const Color(0xFFBCC0CC)}) {
-    return Container(
-        width: 49,
-        height: 49,
-        color: Color(0xFFF2F2F2),
-        child: Center(
-            child:
-            ElevatedButton(
-              style: ButtonStyle(elevation: MaterialStatePropertyAll(0),
-                  fixedSize: MaterialStatePropertyAll(Size(49, 49)),
-                  backgroundColor: MaterialStatePropertyAll(
-                      Colors.transparent)),
-              onPressed: () => context.go(route),
-              child: Icon(
-                icon,
-                color: color,
-              ),
-            )));
+  static Tab bottomBarButton(IconData icon) {
+    return Tab(
+        height: 80,
+        icon: Container(
+            width: 49,
+            height: 49,
+            color: const Color(0xFFF2F2F2),
+            child: Center(
+                child: Icon(
+                  icon,
+                  color: Color(0xFFBABFCD),
+                ))));
   }
 
   static Container bottomBar(BuildContext context) {
-    String? currentRoute = ModalRoute
-        .of(context)
-        ?.settings
-        .name;
-    List<Widget> barButtons = [];
-    switch (currentRoute) {
-      case '/home':
-        {
-          barButtons = [
-            Component.bottomBarButton(
-                context, '/home', Icons.home_filled, color: Color(0xFF5F67EA)),
-            Spacer(),
-            Component.bottomBarButton(context, '/add', Icons.add_circle),
-            Spacer(),
-            Component.bottomBarButton(context, '/profile', Icons.account_circle),
-          ];
-        }
-        break;
-      case '/add':
-        {
-          barButtons = [
-            Component.bottomBarButton(
-                context, '/home', Icons.home_filled),
-            Spacer(),
-            Component.bottomBarButton(context, '/add', Icons.add_circle, color: Color(0xFF5F67EA)),
-            Spacer(),
-            Component.bottomBarButton(context, '/profile', Icons.account_circle),
-          ];
-        }
-        break;
-      case '/profile':
-        {
-          barButtons = [
-            Component.bottomBarButton(
-                context, '/home', Icons.home_filled),
-            Spacer(),
-            Component.bottomBarButton(context, '/add', Icons.add_circle),
-            Spacer(),
-            Component.bottomBarButton(context, '/profile', Icons.account_circle, color: Color(0xFF5F67EA)),
-          ];
-        }
-        break;
-    }
     return Container(
-      height: 80,
-      decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 35)],
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(25), topLeft: Radius.circular(25))),
-      child: Center(
-          child: Container(width: 177, child: Row(
-            children: barButtons,
-          ))
-      ),
-    );
+        height: 80,
+        decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(color: Colors.black, blurRadius: 35, spreadRadius: -10)
+            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25), topLeft: Radius.circular(25))),
+        child: Center(
+            child: TabBar(padding: EdgeInsets.symmetric(horizontal: 75), tabs: [
+              bottomBarButton(Icons.home_filled),
+              bottomBarButton(Icons.add_circle),
+              bottomBarButton(Icons.account_circle),
+            ])));
+  }
+
+  static Container roundedLayout(List<Widget> content) {
+    return Container(
+        width: double.infinity,
+        height: 600,
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+            color: Color(0xFFF7F7F7)),
+        child: SingleChildScrollView(child: Column(children: content)));
+  }
+
+  static Container titledFormField(String title, String placeholder,
+      TextEditingController controller, String validatorMessage, {double height = 52}) {
+    return Container(margin:EdgeInsets.symmetric(vertical: 15), child: Column(
+      children: [
+        Container(
+            padding: EdgeInsets.symmetric(horizontal: 33),
+            width: double.infinity,
+            margin: EdgeInsets.only(bottom: 7),
+            child: Text(title,
+                style: CustomTextStyles.scrollTitle(),
+                textAlign: TextAlign.left)),
+        Container(
+            height: height,
+            padding: EdgeInsets.symmetric(horizontal: 33),
+            width: double.infinity,
+            child: Component.textFormField(controller,
+                placeholder, validatorMessage)),
+      ],
+    ));
   }
 }

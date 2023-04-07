@@ -90,7 +90,7 @@ class Welcome extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: CustomTextStyles.BgText()))),
             const Spacer(),
-            Component.bottomButton("C’est parti !", CustomColors.Pink, context, '/login', 261),
+            Component.bottomButton("C’est parti !", context, '/login', 261, colors: CustomColors.Pink),
             const Spacer()
           ],
         ));

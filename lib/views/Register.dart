@@ -90,7 +90,7 @@ class RegisterState extends State<Register> {
                         "En t’inscrivant, tu acceptes les Conditions générales d’utilisation de Padsou",
                         style: CustomTextStyles.FormSub(color: CustomColors.LessDarkGrey)))),
             Component.bottomButton(
-                'valider', Color(0xFF5F67EA), context, '/', 327),
+                'valider', context, '/', 327),
             Spacer(),
             Component.hyperLink('Déjà un compte ?', 'Connecte toi !', context, '/login')
           ],

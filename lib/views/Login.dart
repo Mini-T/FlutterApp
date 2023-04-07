@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/assets/Colors/Colors.dart';
 import 'package:flutter_project/assets/Components/Components.dart';
 import 'package:flutter_project/assets/fonts/typo.dart';
+import 'package:go_router/go_router.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -46,8 +47,7 @@ class LoginState extends State<Login> {
                   textAlign: TextAlign.right,
                 )),
         Padding(padding: EdgeInsets.symmetric(vertical: 40),child: Component.bottomButton(
-                'Se Connecter', CustomColors.LightPurple, context, '/home',
-                350)),
+                'Se Connecter', context, '/home', 350)),
             Spacer(),
             Component.hyperLink(
                 'Pas encore inscrit ?', 'Allez viens !', context, '/register')
