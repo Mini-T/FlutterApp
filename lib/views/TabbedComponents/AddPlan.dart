@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/assets/Colors/Colors.dart';
 import 'package:flutter_project/assets/Components/Components.dart';
 import 'package:flutter_project/assets/fonts/typo.dart';
+import 'package:flutter_project/views/TabbedComponents/AddPlan/EmbedPic.dart';
+import 'package:flutter_project/views/TabbedComponents/AddPlan/PlanDescriptionForm.dart';
 
 class AddPlan extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class AddPlanState extends State<AddPlan> {
                         'Un bon plan pour en faire profiter les autres',
                         colors: Colors.white, textAlign: TextAlign.left)),
               ])),
-          Component.roundedLayout([
+          Component.roundedLayout(context, [
             Padding(
                 padding: EdgeInsets.only(top: 27, bottom: 42),
                 child: Row(children: [
@@ -43,17 +45,8 @@ class AddPlanState extends State<AddPlan> {
                       width: 46),
                   Spacer(),
                 ])),
-            Component.titledFormField('Titre', 'Abonnement 1 an Basic-Fit',
-                _titleController, 'Met un titre pitié'),
-            Component.titledFormField(
-                'Description',
-                "Ne soit pas trop bavard, on s'en fou, va à l'essentiel",
-                _descController,
-                'Met une description pitié', height: 119),
-            Component.titledFormField('Lien', 'www.lienverstonbonplan.com',
-                _linkController, 'Met un lien pitié'),
-            SizedBox(height: 32),
-            Center(
+            getFormSubmit(),
+            Align(alignment: Alignment.bottomCenter,child: Center(
                 child: ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -68,16 +61,16 @@ class AddPlanState extends State<AddPlan> {
                       borderRadius: BorderRadius.circular(15))),
               child: Text(formSubmitted ? 'Ajouter ce bon plan' : 'Suivant',
                   style: CustomTextStyles.ButtonText()),
-            ))
+            )))
           ])
         ])));
   }
 
   Widget getFormSubmit() {
     if (!!formSubmitted) {
-      return Text("soumis");
+      return EmbedPic();
     } else {
-      return Text("non soumis");
+      return PlanDescriptionForm();
     }
   }
 }

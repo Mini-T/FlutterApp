@@ -79,7 +79,7 @@ class Component {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
+          Padding(padding: EdgeInsets.symmetric(vertical: 8), child: Center(
               heightFactor: 1,
               child: SizedBox(
                   width: 250,
@@ -92,7 +92,7 @@ class Component {
                         fontSize: 26,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.none,
-                      )))),
+                      ))))),
           Center(
               heightFactor: 1,
               child: SizedBox(
@@ -104,14 +104,14 @@ class Component {
   }
 
   static Container textFormField(TextEditingController controller,
-      String placeholder, String validatorMessage) {
+      String placeholder, String validatorMessage, {bool expand = false}) {
     return Container(
-        height: 200,
+
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.white),
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
         child: TextFormField(
-          expands: true,
+          expands: expand,
           minLines: null,
           maxLines: null,
           controller: controller,
@@ -244,7 +244,7 @@ class Component {
             child: Center(
                 child: Icon(
                   icon,
-                  color: Color(0xFFBABFCD),
+                  color: const Color(0xFFBABFCD),
                 ))));
   }
 
@@ -266,20 +266,21 @@ class Component {
             ])));
   }
 
-  static Container roundedLayout(List<Widget> content) {
-    return Container(
+  static Expanded roundedLayout(BuildContext context, List<Widget> content) {
+    return Expanded(flex: 1,child: Container(
         width: double.infinity,
-        height: 600,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(35), topRight: Radius.circular(35)),
             color: Color(0xFFF7F7F7)),
-        child: SingleChildScrollView(child: Column(children: content)));
+        child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.max,children: content)))
+    );
   }
 
   static Container titledFormField(String title, String placeholder,
-      TextEditingController controller, String validatorMessage, {double height = 52}) {
-    return Container(margin:EdgeInsets.symmetric(vertical: 15), child: Column(
+      TextEditingController controller, String validatorMessage,
+      {double height = 52, bool expand = false}) {
+    return Container(margin: EdgeInsets.symmetric(vertical: 15), child: Column(
       children: [
         Container(
             padding: EdgeInsets.symmetric(horizontal: 33),
