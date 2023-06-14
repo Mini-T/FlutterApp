@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/assets/Colors/Colors.dart';
-import 'package:flutter_project/assets/Components/Components.dart';
 import 'package:flutter_project/assets/fonts/typo.dart';
 
 class EmbedPic extends StatelessWidget {

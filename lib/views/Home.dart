@@ -5,6 +5,7 @@ import 'package:flutter_project/assets/Components/Components.dart';
 import 'package:flutter_project/assets/fonts/typo.dart';
 import 'package:flutter_project/views/TabbedComponents/AddPlan.dart';
 import 'package:flutter_project/views/TabbedComponents/HomePage.dart';
+import 'package:flutter_project/views/TabbedComponents/Profile.dart';
 import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
@@ -19,7 +20,7 @@ class Home extends StatelessWidget {
             TabBarView(children: [
               HomePage(),
               AddPlan(),
-              HomePage()
+              Profile()
             ]),
             bottomNavigationBar: Component.bottomBar(context)
         )
